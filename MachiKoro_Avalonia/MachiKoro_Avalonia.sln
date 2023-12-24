@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachiKoro_Client", "MachiKoro_Client\MachiKoro_Client.csproj", "{F8DB1298-6D32-4471-B736-860D58AE5265}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JTProtocol", "JTProtocol\JTProtocol.csproj", "{B09EACE4-9829-420C-B6B1-9F16164FA60D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpServer", "TcpServer\TcpServer.csproj", "{EB7D2B58-7680-47F2-B7D4-C3C72B28FD67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8DB1298-6D32-4471-B736-860D58AE5265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8DB1298-6D32-4471-B736-860D58AE5265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8DB1298-6D32-4471-B736-860D58AE5265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8DB1298-6D32-4471-B736-860D58AE5265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B09EACE4-9829-420C-B6B1-9F16164FA60D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B09EACE4-9829-420C-B6B1-9F16164FA60D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B09EACE4-9829-420C-B6B1-9F16164FA60D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B09EACE4-9829-420C-B6B1-9F16164FA60D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB7D2B58-7680-47F2-B7D4-C3C72B28FD67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB7D2B58-7680-47F2-B7D4-C3C72B28FD67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB7D2B58-7680-47F2-B7D4-C3C72B28FD67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB7D2B58-7680-47F2-B7D4-C3C72B28FD67}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

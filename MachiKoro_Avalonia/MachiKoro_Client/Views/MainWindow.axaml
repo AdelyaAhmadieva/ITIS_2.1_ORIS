@@ -1,0 +1,462 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:MachiKoro_Client.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1600" d:DesignHeight="900"
+        x:Class="MachiKoro_Client.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="MachiKoro_Client"
+        DataContext="JClient">
+    
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <StackPanel Name="MainPanel">
+        
+        
+        <Button Name="BackToGameButton"
+                IsVisible="False"
+                Width="120"
+                Height="40"
+                Background="#757575"
+                Content="Назад"
+                FontSize="20"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Click="BackToGame_OnClick">       <!-- Click = "" Content = ""--> 
+        </Button>
+        
+        <ScrollViewer Name="CardShop"
+                      Height="560"
+                      HorizontalContentAlignment="Center"
+                      IsVisible="False">
+            <Grid >
+                    
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                    
+                    
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <Image MaxHeight = "250" Source="../Assets/CardImages/WheatFieldCard.jpg"/>
+                    <Button Name="ChooseCardButton"  
+                            Content = "Купить" 
+                             Command="{Binding BuyCard}"
+                             CommandParameter="WheatFieldCard"
+                             HorizontalAlignment="Center"
+                            IsEnabled="{Binding Player.IsYourTurn}"
+                            Click="ChooseCardButton_OnClick"></Button> 
+                </StackPanel>
+                    
+            </Grid>
+        </ScrollViewer>
+        
+        
+        
+        
+        <StackPanel Name="UpPanel">
+            <Grid Name="UpPanelGrid">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                
+                <Button Grid.Column="0" Name="ChangeTurnButton"
+                        Width="120"
+                        Height="40"
+                        Background="#757575"
+                        Content="Ход"
+                        FontSize="20"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        IsEnabled="{Binding Player.IsYourTurn}"
+                        Command="{Binding EndTurnReactiveCommand}">       <!-- Click = "" Content = ""--> 
+                        </Button>
+                
+                <StackPanel Grid.Column="1" Name="PlayersStackPanel"
+                            MaxHeight="250"
+                            MinWidth="500"
+                            Background="#757575">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Column="0" Name="Player1"
+                                    Background="Red"
+                                    Height="150"
+                                    Width="150"></StackPanel>
+                        <StackPanel Grid.Column="1" Name="Player2"
+                                    Background="Green"
+                                    Height="150"
+                                    Width="150"></StackPanel>
+                        <StackPanel Grid.Column="2" Name="Player3"
+                                    Background="Blue"
+                                    Height="150"
+                                    Width="150"></StackPanel>
+                    </Grid>
+                    
+                </StackPanel>
+              
+            </Grid>
+        </StackPanel>
+        
+        
+        
+        <StackPanel Margin="10,60,10,10" Name="MidPanel"
+                    Height="500">
+            <ScrollViewer MaxHeight="500">
+                <ListBox Name="MyCards" 
+                         ItemsSource="{Binding Cards}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel >
+                            </WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Image MaxHeight="300" Source="{Binding  }"  />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+            </StackPanel>
+        
+        <StackPanel Name="DownPanel" Margin="0  0 0 0">
+            <StackPanel Name="PlayerNavPanel"
+                        
+                        Orientation="Horizontal"
+                        Background="#757575"
+                        Height="150"
+                        Width="1200">
+                
+                <Button Name="ThrowDiceButton"
+                        Width="200"
+                        Height="60"
+                        FontSize="24"
+                        Command="{Binding ThrowDiceReactiveCommand}"
+                        IsEnabled="{Binding Player.IsYourTurn}"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Margin="10"
+                        Click="ThrowDiceButton_OnClick"
+                >Бросить кубы
+                </Button>
+                <Button Name="ByCardButton"
+                        VerticalAlignment="Center"
+                        Width="200"
+                        Height="60"
+                        FontSize="24"
+                        IsEnabled="False"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Margin="10"
+                        Click="ByCardButton_OnClick"
+                        >Купить карту
+                </Button>
+                
+                <TextBlock HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           TextAlignment="Center"
+                           Name="ThrowResultField"
+                           Width="200"
+                           Height="100"
+                           FontSize="24"
+                           Background="Azure"
+                           Text="{Binding Player.DiceThrowResult}">
+                </TextBlock>
+                
+                <Button Name="ConnectButton"
+                        Width="200"
+                        Height="60"
+                        Command="{Binding 
+                        ConnectPlayerReactiveCommand}"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontSize="30"
+                        Content="Play"
+                        Click="ConnectButton_OnClick">
+                </Button>
+                
+                <TextBlock Name="CoinsAmount"
+                           Width="50"
+                           Height="50"
+                           Background="WhiteSmoke"
+                           Margin = "50,0,0,0"
+                           Text="{Binding Player.Coins}"></TextBlock>
+                
+                
+              
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- 
+    <StackPanel Background="#1f1f1f">
+        <StackPanel Name="UpperUI" Height="560" Background="#fdfdfd">
+            <Button VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left"
+                    Name="NextTurnButton"
+                    Width="60"
+                    Height="40"
+                    FontSize="24"
+                    Command="{Binding EndTurnReactiveCommand}"
+                    IsEnabled="{Binding Player.IsYourTurn}"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Margin="10"> Ход
+            </Button>
+            
+            <Button
+                    Name="GoBackButton"
+                    Height="60"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    FontSize="30"
+                    Content="Назад"
+                    Click="GoBackButton_OnClick">
+            </Button>
+            
+            <ScrollViewer Name="MyCardsStackPanel" Height="600" >
+                <ListBox Name="MyCards" ItemsSource="{Binding Cards}">
+                    <ListBox.ItemTemplate >
+                        <DataTemplate>
+                            <Image MaxHeight="300" Source="{Binding  }"  />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+            
+            <ScrollViewer Name="CardShop" Height="560">
+                <Grid >
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition/>
+                        <RowDefinition />
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    
+                    
+                    <StackPanel Grid.Row="0" Grid.Column="0">
+                        <Image MaxHeight = "250" Source="../Assets/CardImages/WheatFieldCard.jpg"/>
+                        <Button  Content = "Купить" 
+                                 Command="{Binding BuyCard}"
+                                 CommandParameter="WheatFieldCard"
+                                 HorizontalAlignment="Center"></Button> 
+                    </StackPanel>
+                    
+                </Grid>
+            </ScrollViewer>
+            
+            <StackPanel Name = "ClientUp" 
+                        Height="180" 
+                        Width="360" 
+                        Background="Black">
+            </StackPanel>
+            
+            <Grid Name="LeftAndRightClients">
+                <StackPanel Name="ClientLeft" Height="300" 
+                            Width="180" 
+                            Background="Black" HorizontalAlignment="Left" >
+                </StackPanel>
+                
+                <Button Grid.Column="0" Grid.Row="4"
+                                    Name="ConnectButton"
+                        Width="200"
+                        Height="60"
+                        Command="{Binding 
+                        ConnectPlayerReactiveCommand}"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontSize="30"
+                        Content="Play"
+                                    Click="ConnectButton_OnClick">
+                </Button>
+                
+                <StackPanel Name="ClientRight" Height="300" 
+                            Width="180" 
+                            Background="Black" HorizontalAlignment="Right">
+                </StackPanel>
+            </Grid>
+            
+        </StackPanel>
+        
+        
+        <StackPanel Name="LowerUI" Height="240" Background="#d1d1d1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                
+                
+                
+                <Button Grid.Column="1" Grid.Row="0"
+                                    Name="ThrowDiceButton"
+                        Width="200"
+                        Height="60"
+                        FontSize="24"
+                        Command="{Binding ThrowDiceReactiveCommand}"
+                        IsEnabled="{Binding Player.IsYourTurn}"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Margin="10"
+                        IsVisible="False"
+                        >Бросить кубы
+                </Button>
+                <Button Grid.Column="2" Grid.Row="0" VerticalAlignment="Bottom"
+                                    Name="ByCardButton"
+                        Width="200"
+                        Height="60"
+                        FontSize="24"
+                        IsEnabled="{Binding Player.IsYourTurn}"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Margin="10"
+                        IsVisible="False"
+                        Click="ByCardButton_OnClick">Купить карту
+                </Button>
+                
+                <TextBlock Grid.Column="0" Grid.Row="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           TextAlignment="Center"
+                                    Name="ThrowResultField"
+                           Width="200"
+                           Height="100"
+                           FontSize="24"
+                           Background="Azure"
+                           Text="{Binding Player.DiceThrowResult}">
+                </TextBlock>
+                <Button Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom"
+                        Name="ShowMyCardsButton"
+                        Width="200"
+                        Height="60"
+                        FontSize="18"
+                        Command="{Binding ResetMyCardsReactiveCommand}"
+                        IsEnabled="{Binding Player.IsYourTurn}"
+                        VerticalContentAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        Margin="10"
+                        Click="ShowMyCardsButton_OnClick">Посмотреть мои карты
+                </Button>
+                
+                
+            </Grid>
+        </StackPanel>
+        
+    </StackPanel> -->
+
+</Window>
+
+
+
+
+<!--
+    
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        
+        <Button Grid.Column="0" Grid.Row="4"
+                Name="ConnectButton"
+                Width="100"
+                Height="30"
+                Command="{Binding ConnectPlayerReactiveCommand}">Play
+        </Button>
+        
+        <Button Grid.Column="0" Grid.Row="3"
+                Name="ThrowDiceButton"
+                Width="100"
+                Height="30"
+                FontSize="12"
+                Command="{Binding ThrowDiceReactiveCommand}"
+                IsEnabled="{Binding Player.IsYourTurn}">Бросить кубы
+        </Button>
+        
+        <TextBlock Grid.Column="1" Grid.Row="3"
+                 HorizontalAlignment="Center"
+                 TextAlignment="Center"
+                 Name="ThrowResultField"
+                 Width="50"
+                 Height="50"
+                 Background="Azure"
+                 Text="{Binding Player.DiceThrowResult}">
+        </TextBlock>
+        
+        <Button Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom"
+                Name="ByCardButton"
+                Height="30"
+                Width="100"
+                FontSize="12"
+                Click="ByCardButton_OnClick">Купить карту
+        </Button>
+        
+    </Grid>
+    -->

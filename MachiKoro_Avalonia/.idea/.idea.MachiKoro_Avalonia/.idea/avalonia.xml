@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="MachiKoro_Client/App.axaml" value="MachiKoro_Client/MachiKoro_Client.csproj" />
+        <entry key="MachiKoro_Client/Views/CardShopWindow.axaml" value="MachiKoro_Client/MachiKoro_Client.csproj" />
+        <entry key="MachiKoro_Client/Views/MainWindow.axaml" value="MachiKoro_Client/MachiKoro_Client.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
