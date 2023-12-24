@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html class="html">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="https://kttc.ru//favicon.png?v3" type="image/x-icon">
+    <title>Лучшие игроки и кланы. KTTC - Как только, так сразу. Сессионная статистика World of Tanks.</title>
+
+    <style>
+        .html {
+            font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .body {
+            min-height: 100%;
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            color: rgba(0, 0, 0, .8);
+            background-color: #f1f1f1;
+        }
+
+        .header {
+            display: flex;
+            min-height: 80px;
+            border-bottom: 1px solid #dedede;
+            flex-direction: row;
+            box-sizing: border-box;
+            top: 0;
+            width: 100%;
+            position: absolute;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            padding: 10px 0;
+            background: #fbfbfb url(https://kttc.ru/images/logo/bg_v2.svg) no-repeat scroll 50% 0;
+            background-size: cover;
+            max-height: 100px;
+
+        }
+
+        .header-list {
+            margin-right: auto;
+            padding: 0;
+            font-size: 13px;
+            list-style: none;
+            display: flex;
+        }
+
+        .header-menu {
+
+            background: 0 0;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            border: none;
+            padding: 10px;
+            margin: 0 20px;
+            position: relative;
+            right: 0;
+            top: 0;
+        }
+
+        .header-logo {
+            display: flex;
+            width: 121px;
+            height: 50px;
+            background: #fbfbfb;
+            border: 0;
+            vertical-align: middle;
+        }
+
+        .header-input {
+            padding-left: 920px;
+            display: flex;
+            position: relative;
+            flex-direction: row;
+            margin-left: 150px;
+        }
+
+        .input {
+            border: 1px solid #cccccc;
+            line-height: 38px;
+            padding: 0 15px;
+            width: 100%;
+            outline: none;
+            border-right: 0;
+            border-radius: 0;
+            background: #fbfbfb;
+        }
+
+        .header-select {
+            width: 80px;
+            height: 40px;
+            background: transparent;
+        }
+
+        .sign-in-button {
+            margin-left: auto;
+            margin-right: 15px;
+            display: flex;
+            width: 136.66px;
+            align-items: center;
+            border: 1px solid #cbcbcb;
+            text-decoration: none;
+            line-height: 38px;
+            padding-left: 15px;
+            padding-right: 15px;
+            background: transparent;
+            color: #1a1a1a;
+        }
+
+        .header-buttons {
+            margin-left: auto;
+        }
+
+        .search-button {
+            border: 1px solid #cbcbcb;
+            padding: 0 15px;
+            text-decoration: none;
+            color: black;
+            transition: all .5s;
+            line-height: 38px;
+            display: flex;
+            background: transparent;
+            white-space: nowrap;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .search-button:hover {
+            background-color: #f2f2f2;
+            color: black;
+            text-decoration: none;
+        }
+
+        .header-link {
+            font-size: 18px;
+            padding-left: 15px;
+            padding-right: 5px;
+            text-decoration: none;
+            color: #999;
+        }
+
+        .header-link:hover {
+            color: #1a1a1a;
+            text-decoration: underline;
+        }
+
+        .main {
+            padding-top: 80px;
+        }
+
+        .main-img {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            place-self: center;
+            width: 844px;
+            height: 217.52px;
+        }
+
+        .footer {
+            padding: 0;
+            width: 100%;
+            background-color: #f8f8f8;
+            border-top: 1px solid #E5E5E5;
+            color: #999;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 15px 0;
+        }
+
+        .main-table {
+            display: flex;
+            background-color: #fbfbfb;
+            border: 1px solid #dfdfdf;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 25px;
+            max-width: 100%;
+            width: 42%;
+            margin: 1.5vw 1.5%;
+        }
+
+        .main-h2 {
+            font-size: 1.75em;
+            letter-spacing: -0.025em;
+            color: #47463f;
+            margin: 0;
+            font-weight: 500;
+            line-height: 1.75em;
+        }
+
+        .main-p {
+            color: #999;
+            font-size: 1.25em;
+            position: relative;
+            margin: 0 0 2em 0;
+            margin-bottom: 1em;
+        }
+
+        .main-ol {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-bottom: 0;
+            list-style: none;
+            margin: 0 0 2em 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font-weight: normal;
+            vertical-align: baseline;
+            background: transparent;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+
+        .main-li {
+            margin: 0;
+            border: 0;
+            background: transparent;
+            font-size: 100%;
+            font-weight: normal;
+            vertical-align: baseline;
+            padding: 5px 0;
+            position: relative;
+            border-bottom: 1px solid #B1B1B1;
+            counter-increment: step-counter;
+            padding-left: 40px;
+            flex-wrap: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-direction: row;
+        }
+
+        .main-li:before {
+            content: counter(step-counter);
+            width: 40px;
+            display: inline-block;
+            border-radius: 20px;
+            text-align: center;
+            height: 40px;
+            line-height: 39px;
+            font-weight: bold;
+            color: #000000;
+            vertical-align: middle;
+            margin-right: 5px;
+            margin-left: -40px;
+            font-size: 22px;
+        }
+
+        .main-li:first-child::before {
+            background-color: gold;
+            color: white;
+            font-size: 22px;
+        }
+
+        .main-li:nth-child(2)::before {
+            background-color: silver;
+            color: white;
+            font-size: 22px;
+        }
+
+        .main-li:nth-child(3)::before {
+            background-color: #E8B17A;
+            color: white;
+            font-size: 22px;
+        }
+
+        .main-span {
+            margin: 0;
+            border: 0;
+            background: transparent;
+            font-size: 100%;
+            font-weight: normal;
+            vertical-align: baseline;
+            width: 100%;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+
+        .span-left {
+            margin: 0;
+            border: 0;
+            background: transparent;
+            font-size: 100%;
+            font-weight: normal;
+            vertical-align: baseline;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            flex-direction: row;
+            width: 50%;
+            justify-content: flex-start;
+            overflow: hidden;
+        }
+
+        .span-right {
+            margin: 0;
+            border: 0;
+            background: transparent;
+            font-size: 100%;
+            font-weight: normal;
+            vertical-align: baseline;
+            flex-wrap: nowrap;
+            align-items: center;
+            flex-direction: row;
+            width: 20%;
+            justify-content: flex-end;
+        }
+
+        .span-detail {
+            margin-left: auto;
+            border-bottom: 0;
+            padding: 15px 0 0 0;
+        }
+
+        .main-a {
+            margin: 0;
+            border: 0;
+            background: transparent;
+            font-size: 18px;
+            font-weight: normal;
+            vertical-align: baseline;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: #167ac6;
+            text-decoration: none;
+        }
+
+        .main-a:hover {
+            text-decoration: underline;
+        }
+
+        .clan-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 100px;
+        }
+
+        .clan-stat {
+            margin-left: 5px;
+            white-space: nowrap;
+        }
+
+        .table-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body class="body">
+    <header class="header">
+        <ul class="header-list">
+            <li><button class="header-menu" type="button">
+                    <img src="Screenshot 2023-09-08 232007.png" width="50" heigth="30">
+                </button></li>
+            <li><a class="header-logo" href="https://kttc.ru/wot/ru/">
+                    <img src="https://kttc.ru/images/logo/kttc_logo.svg" width="121px" height="50px">
+                </a></li>
+        </ul>
+        <form class="header-input">
+            <input class="input" type="text" autocomplete='off' spellcheck='false' autocorrect='off'
+                placeholder="Введите ник или клан">
+            <select class="header-select">
+                <option>Ник</option>
+                <option>Клан</option>
+            </select>
+            <button class="search-button" type="button" aria-label="Поиск">
+                <img src="https://kttc.ru/images/search.svg" width="14.42" height="13.71">
+            </button>
+        </form>
+        <a class="header-link" href="">Ru</a>
+        <div class="header-buttons">
+            <a class="sign-in-button"
+                href="https://lesta.ru/id/signin/?next=%2Fid%2Fopenid%2F4207337761985678797%2F&trust_root=https%3A%2F%2Fapi.tanki.su%2F&sso_notifications=disable&flow=web_view">Войти
+                с Lesta ID</a>
+        </div>
+    </header>
+    <main class="main">
+        <div>
+            <a class="main-img" href="https://click.track-lesta.ru/BQYH8Zxk">
+                <img src="https://kttc.ru/images/wot/KKTC_Combat_Pass_970x250_LG_SPB_MT-1.jpg" width="844"
+                    height="217.52">
+            </a>
+        </div>
+        <div class="table-container">
+            <section class="main-table">
+                <header>
+                    <h2 class="main-h2">Топ 10 игроков (WN8)</h2>
+                    <p class="main-p">от 15к боев, ср. ур. техники 9-10</p>
+                </header>
+                <ol class="main-ol">
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/WoIfHeart/">WoIfHeart</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5895 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    28160 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (70%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Loisez/">Loisez</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5816 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    17760 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (68%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Stanlox/">Stanlox</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5795 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    34420 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (71%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/__NIDIN__/">__NIDIN__</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5629 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    42057 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (72%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Sh0tnik/">Sh0tnik</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5561 </span>
+                                <span title="Количество боёв" style="color:#c64cff">
+                                    68215 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (71%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Diffynder/">Diffynder</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5539 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    35928 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (70%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Wierer/">Wierer</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5515 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    24293 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (68%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a"
+                                    href="https://kttc.ru/wot/ru/user/Summer_hoodrich/">Summer_hoodrich</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5424 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    22660 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (67%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/selael/">selael</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    4995 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    20522 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (67%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Wilf_/">Wilf_</a>
+                            </span>
+                            <span class="main-eight" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    4986 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    23605 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (70%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="span-detail"><a class="main-a" href="https://kttc.ru/wot/ru/top/users/wn8/15000/">Топ
+                            1000 игроков WN8</a></li>
+                </ol>
+            </section>
+            <section class="main-table">
+                <header>
+                    <h2 class="main-h2">Топ 10 игроков (WN8)</h2>
+                    <p class="main-p">от 15к боев, ср. ур. техники 7-8</p>
+                </header>
+                <ol class="main-ol">
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Exord/">Exord</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    6213 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    20624 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (69%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Geksi/">Geksi</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5563 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    43143 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (69%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Delkonix/">Delkonix</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5403 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    15693 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (68%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/iMeeGo/">iMeeGo</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5323 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    39210 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (67%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Straik/">Straik</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5316 </span>
+                                <span title="Количество боёв" style="color:#c64cff">
+                                    73824 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (72%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/GODS_/">GODS_</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5128 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    24231 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (64%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/KornepIod/">KornepIod</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5005 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    28366 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (66%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Lucky_Bloke/">Lucky_Bloke</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    5002 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    39149 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (65%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a"
+                                    href="https://kttc.ru/wot/ru/user/kttc_rename_33571698/">kttc_rename_33571698</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    4993 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    19546 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (67%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/_AnaboIic_/">_AnaboIic_</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    4979 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    23086 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (65%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="span-detail"><a class="main-a" href="https://kttc.ru/wot/ru/top/users/wn8/15000/">Топ
+                            1000 игроков WN8</a></li>
+                </ol>
+            </section>
+        </div>
+        <div class="table-container">
+            <section class="main-table">
+                <header>
+                    <h2 class="main-h2">Топ 10 игроков (WN8)</h2>
+                    <p class="main-p">от 15к боев, ср. ур. техники 1-6</p>
+                </header>
+                <ol class="main-ol">
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a"
+                                    href="https://kttc.ru/wot/ru/user/Bad_for_enemy_team/">Bad_for_enemy_team</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    9135 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    15126 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (81%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/KPblC_A/">KPblC_A</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    7264 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    27738 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (82%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a"
+                                    href="https://kttc.ru/wot/ru/user/Camper_Antilooser/">Camper_Antilooser</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    6325 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    16838 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (70%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/VOLKOV_82/">VOLKOV_82</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    4869 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    37588 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (74%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/O_GENRY/">O_GENRY</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    4757 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    28048 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (67%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a"
+                                    href="https://kttc.ru/wot/ru/user/O__HECMEPTHbIu__/">O__HECMEPTHbIu__</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    4750 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    32805 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (93%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/KyponaTkuH/">KyponaTkuH</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    4562 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    15669 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (65%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a"
+                                    href="https://kttc.ru/wot/ru/user/kttc_rename_125581623/">kttc_rename_125581623</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    4510 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    16323 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (74%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Ukroos/">Ukroos</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    4443 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    34985 </span>
+                                <span title="Побед" style="color:#25c2dd">
+                                    (63%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Nikulia_metkiy/">Nikulia_metkiy</a>
+                            </span>
+                            <span class="span-right" style="color:#c64cff">
+                                <span title="WN8" style="color:#c64cff">
+                                    4351 </span>
+                                <span title="Количество боёв" style="color:#25c2dd">
+                                    26400 </span>
+                                <span title="Побед" style="color:#c64cff">
+                                    (88%)
+                                </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="span-detail"><a class="main-a" href="https://kttc.ru/wot/ru/top/users/wn8/15000/">Топ
+                        1000 игроков WN8</a></li>
+                </ol>
+            </section>
+            <section class="main-table">
+                <header>
+                    <h2 class="main-h2">Лучшие 10 кланов (WN8)</h2>
+                    <p class="main-p">от 90 игроков</p>
+                </header>
+                <ol class="main-ol">
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <img class="clan-img"
+                                    src="https://lesta.ru/clans/media/clans/emblems/cl_249/474249/emblem_64x64.png" />&nbsp;&nbsp;
+                                <span class="clan-stat" style="color: #31DDE9;">
+                                    <a class="main-a" href="https://kttc.ru/wot/ru/clan/474249/">[ERETC]</a>
+                                </span>&nbsp;&nbsp;
+                            </span>
+                            <span class="span-right">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:#c64cff">
+                                    3613 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <img class="clan-img" style="background-color: #FFD700;"
+                                    src="https://lesta.ru/clans/media/clans/emblems/cl_079/63079/emblem_64x64.png" />&nbsp;&nbsp;
+                                <span class="clan-stat" style="color: #31DDE9;">
+                                    <a class="main-a" href="https://kttc.ru/wot/ru/clan/63079/">[MAX-T]</a>
+                                </span>&nbsp;&nbsp;
+                            </span>
+                            <span class="span-right">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:#c64cff">
+                                    3522 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <img class="clan-img" style="background-color: #9A1AFB;"
+                                    src="https://lesta.ru/clans/media/clans/emblems/cl_842/418842/emblem_64x64.png" />&nbsp;&nbsp;
+                                <span class="clan-stat" style="color: #31DDE9;">
+                                    <a class="main-a" href="https://kttc.ru/wot/ru/clan/418842/">[ASUPA]</a>
+                                </span>&nbsp;&nbsp;
+                            </span>
+                            <span class="span-right">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:#c64cff">
+                                    3309 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <img class="clan-img" style="background-color: #2917EC;"
+                                    src="https://lesta.ru/clans/media/clans/emblems/cl_152/475152/emblem_64x64.png" />&nbsp;&nbsp;
+                                <span class="clan-stat" style="color: #31DDE9;">
+                                    <a class="main-a" href="https://kttc.ru/wot/ru/clan/475152/">[ALEN1]</a>
+                                </span>&nbsp;&nbsp;
+                            </span>
+                            <span class="span-right">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:#c64cff">
+                                    3198 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <img class="clan-img" style="background-color: #FC0000;"
+                                    src="https://lesta.ru/clans/media/clans/emblems/cl_381/23381/emblem_64x64.png" />&nbsp;&nbsp;
+                                <span class="clan-stat" style="color: #31DDE9;">
+                                    <a class="main-a" href="https://kttc.ru/wot/ru/clan/23381/">[CYS]</a>
+                                </span>&nbsp;&nbsp;
+                            </span>
+                            <span class="span-right">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:#c64cff">
+                                    3183 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <img class="clan-img" style="background-color: #A302FF;"
+                                    src="https://lesta.ru/clans/media/clans/emblems/cl_058/104058/emblem_64x64.png" />&nbsp;&nbsp;
+                                <span class="clan-stat" style="color: #31DDE9;">
+                                    <a class="main-a" href="https://kttc.ru/wot/ru/clan/104058/">[T-MAN]</a>
+                                </span>&nbsp;&nbsp;
+                            </span>
+                            <span class="span-right">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:#c64cff">
+                                    2931 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <img class="clan-img" style="background-color: #FF0000;"
+                                    src="https://lesta.ru/clans/media/clans/emblems/cl_406/601406/emblem_64x64.png" />&nbsp;&nbsp;
+                                <span class="clan-stat" style="color: #31DDE9;">
+                                    <a class="main-a" href="https://kttc.ru/wot/ru/clan/601406/">[XOT]</a>
+                                </span>&nbsp;&nbsp;
+                            </span>
+                            <span class="span-right">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:#c64cff">
+                                    2902 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <img class="clan-img"
+                                    src="https://lesta.ru/clans/media/clans/emblems/cl_982/56982/emblem_64x64.png" />&nbsp;&nbsp;
+                                <span class="clan-stat" style="color: #31DDE9;">
+                                    <a class="main-a" href="https://kttc.ru/wot/ru/clan/56982/">[CM-1]</a>
+                                </span>&nbsp;&nbsp;
+                            </span>
+                            <span class="span-right">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:#c64cff">
+                                    2889 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <img class="clan-img" style="background-color: #FFFF00;"
+                                    src="https://lesta.ru/clans/media/clans/emblems/cl_406/21406/emblem_64x64.png" />&nbsp;&nbsp;
+                                <span class="clan-stat" style="color: #31DDE9;">
+                                    <a class="main-a" href="https://kttc.ru/wot/ru/clan/21406/">[CHESS]</a>
+                                </span>&nbsp;&nbsp;
+                            </span>
+                            <span class="span-right">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:#c64cff">
+                                    2875 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <img class="clan-img" style="background-color: #FF0808;"
+                                    src="https://lesta.ru/clans/media/clans/emblems/cl_339/213339/emblem_64x64.png" />&nbsp;&nbsp;
+                                <span class="clan-stat" style="color: #31DDE9;">
+                                    <a class="main-a" href="https://kttc.ru/wot/ru/clan/213339/">[R-BOY]</a>
+                                </span>&nbsp;&nbsp;
+                            </span>
+                            <span class="span-right">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span style="color:#c64cff">
+                                    2851 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="span-detail"><a class="main-a" href="https://kttc.ru/wot/ru/top/clans/wn8/90/">Топ 1000
+                            кланов WN8</a></li>
+                </ol>
+            </section>
+        </div>
+        <div class="table-container">
+            <section class="main-table">
+                <header>
+                    <h2 class="main-h2">Топ 10 игроков (за прошлый месяц)</h2>
+                    <p class="main-p">от 100 боев</p>
+                </header>
+                <ol class="main-ol">
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/_Hukuma_/">
+                                    _Hukuma_ </a>
+                            </span>
+                            <span class="span-right">
+                                <span title="WN8" style="color:#c64cff">
+                                    10200 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Gryberll/">
+                                    Gryberll </a>
+                            </span>
+                            <span class="span-right">
+                                <span title="WN8" style="color:#c64cff">
+                                    9813 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/FuriousGFX/">
+                                    FuriousGFX </a>
+                            </span>
+                            <span class="span-right">
+                                <span title="WN8" style="color:#c64cff">
+                                    9292 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/Yamamoto/">
+                                    Yamamoto </a>
+                            </span>
+                            <span class="span-right">
+                                <span title="WN8" style="color:#c64cff">
+                                    9243 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/_STELS_rus/">
+                                    _STELS_rus </a>
+                            </span>
+                            <span class="span-right">
+                                <span title="WN8" style="color:#c64cff">
+                                    8812 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/_YOK_trovo_exTenezar/">
+                                    _YOK_trovo_exTenezar </a>
+                            </span>
+                            <span class="span-right">
+                                <span title="WN8" style="color:#c64cff">
+                                    8761 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/LarryWilliams/">
+                                    LarryWilliams </a>
+                            </span>
+                            <span class="span-right">
+                                <span title="WN8" style="color:#c64cff">
+                                    8671 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" class="main-a" href="https://kttc.ru/wot/ru/user/D0N_PEDR0_/">
+                                    D0N_PEDR0_ </a>
+                            </span>
+                            <span class="span-right">
+                                <span title="WN8" style="color:#c64cff">
+                                    8273 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" class="main-a" href="https://kttc.ru/wot/ru/user/Samter/">
+                                    Samter </a>
+                            </span>
+                            <span class="span-right">
+                                <span title="WN8" style="color:#c64cff">
+                                    8192 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="main-li">
+                        <span class="main-span">
+                            <span class="span-left">
+                                <a class="main-a" href="https://kttc.ru/wot/ru/user/XeX_He_TaK/">
+                                    XeX_He_TaK </a>
+                            </span>
+                            <span class="span-right">
+                                <span title="WN8" style="color:#c64cff">
+                                    8148 </span>
+                            </span>
+                        </span>
+                    </li>
+                    <li class="span-detail"><a class="main-a"
+                            href="https://kttc.ru/wot/ru/top/users-last-month/wn8/100/">Топ 1000 игроков (за прошлый
+                            месяц) WN8</a></li>
+                </ol>
+            </section>
+        </div>
+    </main>
+    <footer class="footer">
+        <p>© 2013 - 2023 KTTC. Все права защищены. 12+ | С 2013-2020 года Официальный фан ресурс World of Tanks. С 2020
+            года не являемся такими.</p>
+        <p>hi@kttc.ru</p>
+    </footer>
+</body>
+
+</html>
