@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tlzAcN41I0rssWoS0n2XVh4DdFjhZRGlHJk/pQ0f7c3c2mVs6K+t7+zZrbm1AHcELfZ5n67CTwWt73O3e423qw==",
+  "dgSpecHash": "y0KcL9syN5uqzC1EJjW5iNU2Jn1Du2gi3uZgODEp8gJOUsM+87L/t0Q/UjpOx83yimjpphkoE8XvEWAlegzmXw==",
   "success": true,
-  "projectFilePath": "/home/adelya/repos/ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj",
+  "projectFilePath": "/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj",
   "expectedPackageFiles": [
     "/home/adelya/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
   ],

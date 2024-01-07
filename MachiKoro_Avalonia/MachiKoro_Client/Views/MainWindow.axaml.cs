@@ -29,6 +29,7 @@ public partial class MainWindow : Window
         ConnectButton.IsVisible = false;
         ThrowDiceButton.IsVisible = true;
         ByCardButton.IsVisible = true;
+        StartGamePanel.IsVisible = false;
     }
 
 
@@ -54,7 +55,7 @@ public partial class MainWindow : Window
 
     private void ChooseCardButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        ByCardButton.IsEnabled = false;
+        //ByCardButton.IsEnabled = false;
         ChooseCardButton.IsEnabled = false;
     }
 
@@ -64,6 +65,8 @@ public partial class MainWindow : Window
         ByCardButton.IsEnabled = true;
         ThrowDiceButton.IsEnabled = false;
     }
+    
+    
 }
 
 /*

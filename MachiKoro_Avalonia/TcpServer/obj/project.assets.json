@@ -78,11 +78,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/adelya/repos/ORIS/MachiKoro_Avalonia/TcpServer/TcpServer.csproj",
+      "projectUniqueName": "/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/TcpServer/TcpServer.csproj",
       "projectName": "TcpServer",
-      "projectPath": "/home/adelya/repos/ORIS/MachiKoro_Avalonia/TcpServer/TcpServer.csproj",
+      "projectPath": "/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/TcpServer/TcpServer.csproj",
       "packagesPath": "/home/adelya/.nuget/packages/",
-      "outputPath": "/home/adelya/repos/ORIS/MachiKoro_Avalonia/TcpServer/obj/",
+      "outputPath": "/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/TcpServer/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/adelya/.nuget/NuGet/NuGet.Config"
@@ -97,8 +97,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/home/adelya/repos/ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj": {
-              "projectPath": "/home/adelya/repos/ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj"
+            "/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj": {
+              "projectPath": "/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj"
             }
           }
         }

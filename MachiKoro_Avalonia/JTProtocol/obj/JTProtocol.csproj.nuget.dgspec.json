@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/adelya/repos/ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj": {}
+    "/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj": {}
   },
   "projects": {
-    "/home/adelya/repos/ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj": {
+    "/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/adelya/repos/ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj",
+        "projectUniqueName": "/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj",
         "projectName": "JTProtocol",
-        "projectPath": "/home/adelya/repos/ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj",
+        "projectPath": "/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/JTProtocol.csproj",
         "packagesPath": "/home/adelya/.nuget/packages/",
-        "outputPath": "/home/adelya/repos/ORIS/MachiKoro_Avalonia/JTProtocol/obj/",
+        "outputPath": "/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/adelya/.nuget/NuGet/NuGet.Config"

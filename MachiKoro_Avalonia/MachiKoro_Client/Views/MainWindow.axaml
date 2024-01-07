@@ -28,7 +28,7 @@
                 FontSize="20"
                 VerticalContentAlignment="Center"
                 HorizontalContentAlignment="Center"
-                Click="BackToGame_OnClick">       <!-- Click = "" Content = ""--> 
+                Click="BackToGame_OnClick"> 
         </Button>
         
         <ScrollViewer Name="CardShop"
@@ -51,12 +51,56 @@
                     
                     
                 <StackPanel Grid.Row="0" Grid.Column="0">
-                    <Image MaxHeight = "250" Source="../Assets/CardImages/WheatFieldCard.jpg"/>
+                    <Image MaxHeight = "250" Source="../Assets/CardImages/WheatFieldCard.png"/>
                     <Button Name="ChooseCardButton"  
                             Content = "Купить" 
                              Command="{Binding BuyCard}"
                              CommandParameter="WheatFieldCard"
                              HorizontalAlignment="Center"
+                            IsEnabled="{Binding Player.IsYourTurn}"
+                            Click="ChooseCardButton_OnClick"></Button> 
+                </StackPanel>
+                
+                <StackPanel Grid.Row="0" Grid.Column="1">
+                    <Image MaxHeight = "250" Source="../Assets/CardImages/CaffeCard.png"/>
+                    <Button Name="ChooseCardButton1"  
+                            Content = "Купить" 
+                            Command="{Binding BuyCard}"
+                            CommandParameter="CaffeCard"
+                            HorizontalAlignment="Center"
+                            IsEnabled="{Binding Player.IsYourTurn}"
+                            Click="ChooseCardButton_OnClick"></Button> 
+                </StackPanel>
+                
+                <StackPanel Grid.Row="0" Grid.Column="2">
+                    <Image MaxHeight = "250" Source="../Assets/CardImages/BackeryCard.png"/>
+                    <Button Name="ChooseCardButton2"  
+                            Content = "Купить" 
+                            Command="{Binding BuyCard}"
+                            CommandParameter="BackeryCard"
+                            HorizontalAlignment="Center"
+                            IsEnabled="{Binding Player.IsYourTurn}"
+                            Click="ChooseCardButton_OnClick"></Button> 
+                </StackPanel>
+                
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <Image MaxHeight = "250" Source="../Assets/CardImages/FarmCard.png"/>
+                    <Button Name="ChooseCardButton3"  
+                            Content = "Купить" 
+                            Command="{Binding BuyCard}"
+                            CommandParameter="FarmCard"
+                            HorizontalAlignment="Center"
+                            IsEnabled="{Binding Player.IsYourTurn}"
+                            Click="ChooseCardButton_OnClick"></Button> 
+                </StackPanel>
+                
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <Image MaxHeight = "250" Source="../Assets/CardImages/ShopCard.png"/>
+                    <Button Name="ChooseCardButton4"  
+                            Content = "Купить" 
+                            Command="{Binding BuyCard}"
+                            CommandParameter="ShopCard"
+                            HorizontalAlignment="Center"
                             IsEnabled="{Binding Player.IsYourTurn}"
                             Click="ChooseCardButton_OnClick"></Button> 
                 </StackPanel>
@@ -67,61 +111,86 @@
         
         
         
-        <StackPanel Name="UpPanel">
-            <Grid Name="UpPanelGrid">
+        <StackPanel Name="UpPanel" Orientation="Horizontal"  HorizontalAlignment="Center">
                 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                
-                <Button Grid.Column="0" Name="ChangeTurnButton"
+                <Button Name="ChangeTurnButton"
                         Width="120"
                         Height="40"
                         Background="#757575"
                         Content="Ход"
                         FontSize="20"
+                        Margin="10,0,10,0"
                         VerticalContentAlignment="Center"
                         HorizontalContentAlignment="Center"
                         IsEnabled="{Binding Player.IsYourTurn}"
                         Command="{Binding EndTurnReactiveCommand}">       <!-- Click = "" Content = ""--> 
                         </Button>
                 
-                <StackPanel Grid.Column="1" Name="PlayersStackPanel"
+                <StackPanel Name="PlayersStackPanel" 
                             MaxHeight="250"
                             MinWidth="500"
-                            Background="#757575">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <StackPanel Grid.Column="0" Name="Player1"
-                                    Background="Red"
-                                    Height="150"
-                                    Width="150"></StackPanel>
-                        <StackPanel Grid.Column="1" Name="Player2"
-                                    Background="Green"
-                                    Height="150"
-                                    Width="150"></StackPanel>
-                        <StackPanel Grid.Column="2" Name="Player3"
-                                    Background="Blue"
-                                    Height="150"
-                                    Width="150"></StackPanel>
-                    </Grid>
+                            HorizontalAlignment="Center">
+                    <ScrollViewer MaxHeight="500" Background="Aqua" Height="100">
+                        <ListBox ItemsSource="{Binding Player.Enemies }"
+                                 x:Name="PlayersListBox"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Stretch"
+                                 Background="#80461C"
+                                 MinHeight="45"
+                                 Height="{Binding $parent[Grid].Height}">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                                        <TextBlock Text="{Binding Item2}" HorizontalAlignment="Center" Foreground="White"
+                                                   VerticalAlignment="Center" FontSize="16">
+                                        </TextBlock>
+                                        <TextBlock Text="{Binding Item1}" HorizontalAlignment="Center" Foreground="White"
+                                                   VerticalAlignment="Center" FontSize="16" Margin="10 0 10 0">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
                     
                 </StackPanel>
-              
-            </Grid>
         </StackPanel>
         
         
         
         <StackPanel Margin="10,60,10,10" Name="MidPanel"
                     Height="500">
+            
+            <StackPanel IsVisible="True" Width="200" HorizontalAlignment="Center" Name="StartGamePanel">
+                <TextBlock Margin="0,10,0,10"> Введите имя </TextBlock>
+                <TextBox Name="NameBox" Height="20" Width="200" 
+                         Background="DarkGray" Margin="0,0,0,10"
+                         Text="{Binding Player.Name}"></TextBox>
+                <Button Name="ConnectButton"
+                        Width="100"
+                        Height="50"
+                        Command="{Binding 
+                        ConnectPlayerReactiveCommand}"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontSize="24"
+                        Content="Play"
+                        Click="ConnectButton_OnClick">
+                </Button>
+            </StackPanel>
+            
+            <StackPanel IsVisible="{Binding Player.IsGameEnded}">
+                <TextBlock>ИГРА ОКОНЧЕНА</TextBlock>
+                <TextBlock Text="{Binding Player.WinString}"></TextBlock>
+            </StackPanel>
+            
+            
             <ScrollViewer MaxHeight="500">
                 <ListBox Name="MyCards" 
                          ItemsSource="{Binding Cards}">
@@ -148,6 +217,8 @@
                         Background="#757575"
                         Height="150"
                         Width="1200">
+                
+                
                 
                 <Button Name="ThrowDiceButton"
                         Width="200"
@@ -185,28 +256,42 @@
                            Text="{Binding Player.DiceThrowResult}">
                 </TextBlock>
                 
-                <Button Name="ConnectButton"
-                        Width="200"
-                        Height="60"
-                        Command="{Binding 
-                        ConnectPlayerReactiveCommand}"
-                        HorizontalAlignment="Center"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        FontSize="30"
-                        Content="Play"
-                        Click="ConnectButton_OnClick">
-                </Button>
+                <StackPanel VerticalAlignment="Center" Margin="30,0,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>ID: </TextBlock>
+                        <TextBlock  Name="PlayerID"
+                                    Text="{Binding Player.ClientID}">
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Монеты: </TextBlock>
+                        <TextBlock Name="CoinsAmount"
+                                   Text="{Binding Player.Coins}"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
                 
-                <TextBlock Name="CoinsAmount"
-                           Width="50"
-                           Height="50"
-                           Background="WhiteSmoke"
-                           Margin = "50,0,0,0"
-                           Text="{Binding Player.Coins}"></TextBlock>
-                
-                
-              
+                <ScrollViewer MaxHeight="500" Height="100">
+                    <ListBox ItemsSource="{Binding Player.PlayerMessages }"
+                             x:Name="PlayersMessageBox"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Stretch"
+                             Background="Honeydew"
+                             MinHeight="45"
+                             Height="{Binding $parent[Grid].Height}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel  />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch">
+                                    <TextBlock Text="{Binding}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
             </StackPanel>
         </StackPanel>
     </StackPanel>

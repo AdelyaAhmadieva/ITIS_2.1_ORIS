@@ -15,12 +15,13 @@ public class CardShop
 
     private void ShopFilling()
     {
-        Cards.Add("Пекарня", new BackeryCard());
-        Cards.Add("Магазин", new ShopCard());
+        Cards.Add("BackeryCard", new BackeryCard());
+        Cards.Add("ShopCard", new ShopCard());
         
-        Cards.Add("Кафе", new CafeCard());
+        Cards.Add("CaffeCard", new CaffeCard());
         
         Cards.Add("WheatFieldCard", new WheatFieldCard());
+        Cards.Add("FarmCard", new FarmCard());
         
     }
 }

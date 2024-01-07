@@ -15,6 +15,7 @@ public class ShopCard : ICard
         Cost = 2;
         TriggerNubmers = new [] { 4 };
         EarnCoinsTriggerNumber = 3;
+        Name = "ShopCard";
 
     }  
 }

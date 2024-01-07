@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
-    <mapping directory="$PROJECT_DIR$/../../My/ITIS2.1" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../ORIS" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../myRails/TeamShark" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../task_tracker_itis_Adelya209" vcs="Git" />
   </component>
 </project>

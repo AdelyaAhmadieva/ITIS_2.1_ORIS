@@ -27,10 +27,74 @@ public class JClient : ObservableObject
     private IPEndPoint? _serverEndPoint;
     
     // ---Player fields
-    
-    public int clientID;
 
-    public List<Player> OtherPlayers;
+
+    private int _clientID;
+
+    private bool isGameEnded;
+
+    private string winString;
+
+
+    private ObservableCollection<string> _playerMessages;
+    public ObservableCollection<string> PlayerMessages
+    {
+        get => _playerMessages;
+        set
+        {
+            _playerMessages = value;
+            OnPropertyChanged();
+        }
+
+    }
+    
+    
+    public string WinString
+    {
+        get => winString;
+        set
+        {
+            winString = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    
+    
+    
+
+    public bool IsGameEnded
+    {
+        get => isGameEnded;
+        set
+        {
+            isGameEnded = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    private string _name;
+    public string Name
+    {
+        get => _name;
+        set
+        {
+            _name = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public int ClientID
+    {
+        get => _clientID;
+        set
+        {
+            _clientID = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private bool isPlayerListFull = false;
 
     private CardShop Shop;
 
@@ -68,6 +132,18 @@ public class JClient : ObservableObject
         }
     }
 
+    
+    private ObservableCollection<Tuple<int,string>> _enemies;
+    public ObservableCollection<Tuple<int,string>> Enemies
+    {
+        get => _enemies;
+        set
+        {
+            _enemies = value;
+            OnPropertyChanged();
+        }
+
+    }
 
     private ObservableCollection<ICard> _myCards;
     public ObservableCollection<ICard> MyCards
@@ -80,15 +156,18 @@ public class JClient : ObservableObject
         }
 
     }
-  
-
+    
     public JClient()
     {
+        isGameEnded = false;
         Coins = 2;
         MyCards = new ObservableCollection<ICard>()
         {
-            new WheatFieldCard()
+            new WheatFieldCard(),
+            new BackeryCard()
         };
+        Enemies = new ObservableCollection<Tuple<int, string>>();
+        PlayerMessages = new ObservableCollection<string>();
     }
 
 
@@ -104,7 +183,8 @@ public class JClient : ObservableObject
             QueuePacketSend(JPacketConverter.Serialize(JPacketType.Connection,
                 new JPacketConnection
                 {
-                    IsSuccessful = false
+                    IsSuccessful = false,
+                    PlayerName = Name
                 }).ToPacket());
 
             await Task.Delay(100);
@@ -116,8 +196,6 @@ public class JClient : ObservableObject
             throw;
         }
     }
-
-    
     
     private void ConnectAsync(string ip, int port) => ConnectAsync(new IPEndPoint(IPAddress.Parse(ip), port));
 
@@ -190,6 +268,9 @@ public class JClient : ObservableObject
             case JPacketType.PlayersInformation:
                 ProcessPlayersInformation(packet);
                 break;
+            case JPacketType.EndGame:
+                ProcessEndGame(packet);
+                break;
             default:
                 throw new ArgumentException("Получен неизвестный пакет");
         }
@@ -207,17 +288,41 @@ public class JClient : ObservableObject
 
         if (connection.IsSuccessful)
         {
-            Console.WriteLine("Handshake successful!");
-            clientID = connection.id;
-            Console.WriteLine("Your id:" + clientID);
+            PlayerMessages.Add("Handshake successful!");
+            ClientID = connection.id;
+            PlayerMessages.Add("Your id:" + ClientID);
         }
         
     }
 
     private void ProcessPlayersInformation(JPacket packet)
     {
-        var playersList = JPacketConverter.Deserialize<JPacketConnection>(packet);
+        PlayerMessages.Add($"Принят игрок ");
         
+            var playersList = JPacketConverter.Deserialize<JPacketPlayersListInformation>(packet);
+            foreach (var playerData in playersList.PlayerInformationList)
+            {
+                PlayerMessages.Add($"Принят игрок {playerData.Item1}  {playerData.Item2}"  );
+                if (ClientID != playerData.Item1)
+                {
+                    Enemies.Add(new Tuple<int, string>(playerData.Item1, playerData.Item2));
+                }
+            }
+    }
+
+    private void ProcessEndGame(JPacket packet)
+    {
+        var data = JPacketConverter.Deserialize<JPacketEndGame>(packet);
+
+        isGameEnded = true;
+        if (ClientID == data.WinnerID)
+        {
+            WinString = "Ты победил!";
+        }
+        else
+        {
+            WinString = $"Победил игрок с ID {data.WinnerID}";
+        }
         
     }
 
@@ -227,6 +332,9 @@ public class JClient : ObservableObject
 
 
         DiceThrowResult = data.Result;
+        
+        if(data.PlayerID != ClientID) PlayerMessages.Add($"Игроку номер {data.PlayerID} выпало {data.Result}");
+        
         RedCardCheck(data.Result, data.PlayerID);
         BlueCardCheck(data.Result, data.PlayerID);
     }
@@ -247,14 +355,15 @@ public class JClient : ObservableObject
             Coins = 0;
         }
         
-        Console.WriteLine("not stonks, монет осталось:" + Coins);
+        PlayerMessages.Add("not stonks, монет осталось:" + Coins);
     }
 
     private void ProcessGiveCoinsToPlayer(JPacket packet)
     {
         var data = JPacketConverter.Deserialize<JPacketGiveCoins>(packet);
         Coins += data.CoinsToGive;
-        Console.WriteLine("STOOOONKS, теперь у тебя монет:" + Coins );
+        PlayerMessages.Add("STOOOONKS, теперь у тебя монет:" + Coins );
+        CheckWinner();
     }
 
     private void ProcessChangeTurn(JPacket packet)
@@ -262,12 +371,11 @@ public class JClient : ObservableObject
         try
         {
             var data = JPacketConverter.Deserialize<JPacketChangeTurn>(packet);
-            Console.WriteLine($"Мне пришел найди {data.PlayerID}, а мой {clientID}");
 
-            if (clientID == data.PlayerID )
+            if (ClientID == data.PlayerID )
             {
                 IsYourTurn = true;
-                Console.WriteLine("Ваш ход");
+                PlayerMessages.Add("Твой Ход");
             }
             else
             {
@@ -291,16 +399,57 @@ public class JClient : ObservableObject
             if (card.Type == CardTypes.Blue)
                 foreach (var n in card.TriggerNubmers)
                 {
-                    if(n == diceValue) result += card.Cost;
+                    if(n == diceValue) result += card.EarnCoinsTriggerNumber;
                 }
         }
 
         Coins += result;
+        CheckWinner();
     }
+    private void GreenCardCheck(int diceValue, int throwerId)
+    {
+        int result = 0;
+        foreach (var card in MyCards)
+        {
+            if (card.Type == CardTypes.Green)
+                foreach (var n in card.TriggerNubmers)
+                {
+                    if(n == diceValue) result += card.EarnCoinsTriggerNumber;
+                }
+        }
+
+        Coins += result;
+        CheckWinner();
+    }
+
+    
 
     private void RedCardCheck(int diceValue, int throwerId)
     {
-        Console.WriteLine("fd");
+        if (ClientID != throwerId)
+        {
+            int result = 0;
+            foreach (var card in MyCards)
+            {
+                if (card.Type == CardTypes.Red)
+                    foreach (var n in card.TriggerNubmers)
+                    {
+                        if (n == diceValue) result += card.EarnCoinsTriggerNumber;
+                    }
+            }
+            
+            if (result > 0)
+            {
+                QueuePacketSend(JPacketConverter.Serialize(JPacketType.Payment,
+                    new JPacketPayment()
+                    {
+                        GiveToClient = ClientID,
+                        TakeFromClient = throwerId,
+                        CoinsAmountToTake = result
+                    }).ToPacket());
+            }
+            
+        }
     }
     
     public void DiceThrowPacketCreate() // если игрок кинул кости - послать пакет с информацией об этом на сервер и ждать ответ (мб у кого-то есть красные карты)
@@ -308,16 +457,15 @@ public class JClient : ObservableObject
         Random r = new Random();
         DiceThrowResult = r.Next(1, 6);
         
+        GreenCardCheck(DiceThrowResult, ClientID);
+        
         QueuePacketSend(JPacketConverter.Serialize(JPacketType.DiceThrowAction,
             new JPacketDiceThrowAction()
             {
-                PlayerID = clientID,
+                PlayerID = ClientID,
                 Value = DiceThrowResult
             }).ToPacket());
-        Console.WriteLine("На кубе выпало " + DiceThrowResult);
-        
-        
-        
+        PlayerMessages.Add("На кубе выпало " + DiceThrowResult);
     }
 
     public void ChangeTurn()
@@ -326,9 +474,9 @@ public class JClient : ObservableObject
         QueuePacketSend(JPacketConverter.Serialize(JPacketType.ChangeTurn,
             new JPacketChangeTurn()
             {
-                PlayerID = clientID,
+                PlayerID = ClientID,
             }).ToPacket());
-        Console.WriteLine("Ход перешел");
+        PlayerMessages.Add("Ход перешел к другому игроку");
     }
 
     public void BuyCard(string cardName)
@@ -339,6 +487,18 @@ public class JClient : ObservableObject
             Coins -= Shop.Cards[cardName].Cost;
         }
         
+    }
+
+    public void CheckWinner()
+    {
+        if (Coins >= 15)
+        {
+            QueuePacketSend(JPacketConverter.Serialize(JPacketType.EndGame,
+                new JPacketEndGame()
+                {
+                    WinnerID = ClientID,
+                }).ToPacket());
+        }
     }
     
     // ---

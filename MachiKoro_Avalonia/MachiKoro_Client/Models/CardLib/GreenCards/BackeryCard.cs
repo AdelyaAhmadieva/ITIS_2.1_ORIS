@@ -15,6 +15,7 @@ public class BackeryCard : ICard
         Cost = 1;
         TriggerNubmers = new [] { 2, 3 };
         EarnCoinsTriggerNumber = 1;
+        Name = "BackeryCard";
 
     }
 }

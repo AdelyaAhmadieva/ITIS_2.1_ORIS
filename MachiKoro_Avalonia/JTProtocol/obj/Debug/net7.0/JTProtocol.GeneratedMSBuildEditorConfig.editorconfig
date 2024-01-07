@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = JTProtocol
-build_property.ProjectDir = /home/adelya/repos/ORIS/MachiKoro_Avalonia/JTProtocol/
+build_property.ProjectDir = /home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/

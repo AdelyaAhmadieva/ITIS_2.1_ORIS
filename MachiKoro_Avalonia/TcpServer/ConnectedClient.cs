@@ -9,6 +9,7 @@ namespace TCPServer;
 internal class ConnectedClient
 {
     private Socket Client { get; }
+    List<Tuple<int, string>> Information = new List<Tuple<int, string>>();
 
     private readonly Queue<byte[]> _packetSendingQueue = new();
     
@@ -17,7 +18,7 @@ internal class ConnectedClient
 
     private string Name { get; set; }
 
-    private int Argb { get; set; }
+    private int ID { get; set; }
 
     public ConnectedClient(Socket client)
     {
@@ -69,7 +70,9 @@ internal class ConnectedClient
             case JPacketType.ChangeTurn:
                 ProcessChangeTurn(packet);
                 break;
-            
+            case JPacketType.EndGame:
+                ProcessEndGame(packet);
+                break;
             default:
                 throw new ArgumentException("Получен неизвестный пакет");
         }
@@ -82,10 +85,14 @@ internal class ConnectedClient
         var connection = JPacketConverter.Deserialize<JPacketConnection>(packet);
         connection.IsSuccessful = true;
         connection.id = JServer._clients.Count - 1;
+        ID = connection.id;
+        Console.WriteLine(ID);
+        Name = connection.PlayerName;
         Console.WriteLine("Handshake successful, количество игроков: " + JServer._clients.Count);
-        
+        Thread.Sleep(100);
         QueuePacketSend(JPacketConverter.Serialize(JPacketType.Connection, connection).ToPacket());
     }
+    
 
     private void ProcessDiceThrowAction(JPacket packet)
     {
@@ -108,7 +115,7 @@ internal class ConnectedClient
         }
     }
 
-    public void ProcessPayment(JPacket packet)
+    private void ProcessPayment(JPacket packet)
     {
         var data = JPacketConverter.Deserialize<JPacketPayment>(packet);
         
@@ -143,12 +150,25 @@ internal class ConnectedClient
         Console.WriteLine($"Хрд перешел к игроку номер {nextPlayerId}");
 
     }
+
+    private void ProcessEndGame(JPacket packet)
+    {
+        var data = JPacketConverter.Deserialize<JPacketEndGame>(packet);
+        foreach (var client in JServer._clients)
+        {
+            QueuePacketSend(JPacketConverter.Serialize(JPacketType.EndGame, 
+                new JPacketEndGame()
+                {
+                    WinnerID = data.WinnerID
+                }).ToPacket());
+        }
+    }
     
     
     
     private void QueuePacketSend(byte[] packet)
     {
-        if (packet.Length > 128)
+        if (packet.Length > 256)
             throw new Exception("Max packet size is 128 bytes.");
 
         _packetSendingQueue.Enqueue(packet);
@@ -156,7 +176,24 @@ internal class ConnectedClient
 
     public void StartGameSession()
     {
-        int PlayerBeginID = _random.Next(0, JServer._clients.Count()-1);
+        Thread.Sleep(1000);
+        foreach (var c in JServer._clients)
+        {
+            Console.WriteLine("ID добавленного клиента" + c.ID);
+            Information.Add(new Tuple<int, string>(c.ID, c.Name));
+        }
+        
+        
+        foreach (var client in JServer._clients)
+        {
+            Thread.Sleep(100);
+           client.QueuePacketSend(JPacketConverter.Serialize(JPacketType.PlayersInformation, new JPacketPlayersListInformation()
+           {
+               PlayerInformationList = Information
+           }).ToPacket());
+        }
+
+        int PlayerBeginID = _random.Next(0, JServer._clients.Count() - 1);
         JServer._clients[PlayerBeginID].QueuePacketSend(JPacketConverter.Serialize(JPacketType.ChangeTurn, 
                 new JPacketChangeTurn()
                 {

@@ -22,3 +22,15 @@
 /home/adelya/repos/ORIS/MachiKoro_Avalonia/JTProtocol/obj/Debug/net7.0/refint/JTProtocol.dll
 /home/adelya/repos/ORIS/MachiKoro_Avalonia/JTProtocol/obj/Debug/net7.0/JTProtocol.pdb
 /home/adelya/repos/ORIS/MachiKoro_Avalonia/JTProtocol/obj/Debug/net7.0/ref/JTProtocol.dll
+/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/bin/Debug/net7.0/JTProtocol.deps.json
+/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/bin/Debug/net7.0/JTProtocol.dll
+/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/bin/Debug/net7.0/JTProtocol.pdb
+/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/obj/Debug/net7.0/JTProtocol.csproj.AssemblyReference.cache
+/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/obj/Debug/net7.0/JTProtocol.GeneratedMSBuildEditorConfig.editorconfig
+/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/obj/Debug/net7.0/JTProtocol.AssemblyInfoInputs.cache
+/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/obj/Debug/net7.0/JTProtocol.AssemblyInfo.cs
+/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/obj/Debug/net7.0/JTProtocol.csproj.CoreCompileInputs.cache
+/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/obj/Debug/net7.0/JTProtocol.dll
+/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/obj/Debug/net7.0/refint/JTProtocol.dll
+/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/obj/Debug/net7.0/JTProtocol.pdb
+/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/JTProtocol/obj/Debug/net7.0/ref/JTProtocol.dll

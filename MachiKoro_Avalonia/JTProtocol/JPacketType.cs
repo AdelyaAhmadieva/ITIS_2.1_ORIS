@@ -12,5 +12,6 @@ public enum JPacketType
     TakeCoins,
     Payment,
     ChangeTurn,
-    PlayersInformation
+    PlayersInformation,
+    EndGame
 }

@@ -16,6 +16,7 @@ public static class JPacketTypeManager
         RegisterType(JPacketType.DiceThrowResult, 8, 0);
         RegisterType(JPacketType.ChangeTurn, 9, 0);
         RegisterType(JPacketType.PlayersInformation, 10, 0);
+        RegisterType(JPacketType.EndGame, 11, 0);
         
     }
 

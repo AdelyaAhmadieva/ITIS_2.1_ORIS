@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kmSEUNglzWTmTACwIBJlJrVOfTowvFMT1potCA39kGviqTN+3OHfy4NUThNSX4DRIpS8DEuoSnl0+r7KszEnGA==",
+  "dgSpecHash": "QW3qpCpC+qiKyLi9dzlSNs2G31YrwFIJU/LT745ptTfPmkhCxQqNAUJ0Eq6GGJu0nUOA393jV+kp4JVzQ/v4fQ==",
   "success": true,
-  "projectFilePath": "/home/adelya/repos/ORIS/MachiKoro_Avalonia/MachiKoro_Client/MachiKoro_Client.csproj",
+  "projectFilePath": "/home/adelya/repositories/ORIS/ITIS_2.1_ORIS/MachiKoro_Avalonia/MachiKoro_Client/MachiKoro_Client.csproj",
   "expectedPackageFiles": [
     "/home/adelya/.nuget/packages/avalonia/11.0.6/avalonia.11.0.6.nupkg.sha512",
     "/home/adelya/.nuget/packages/avalonia.angle.windows.natives/2.1.0.2023020321/avalonia.angle.windows.natives.2.1.0.2023020321.nupkg.sha512",

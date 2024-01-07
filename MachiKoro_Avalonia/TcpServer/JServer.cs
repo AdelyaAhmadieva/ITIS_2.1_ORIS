@@ -14,9 +14,12 @@ internal class JServer
     // ReSharper disable once CollectionNeverQueried.Local
     internal static List<ConnectedClient> _clients = new();
 
-    private bool _full;
+    private bool _full = false;
+    private bool isGameStarted = false;
     private bool _listening;
     private bool _stopListening;
+
+    private int PlayersAmount = 4; // КОЛИЧЕСТВО ИГРОКОВ УКАЗАТЬ ЗДЕСЬ
 
     public Task StartAsync()
     {
@@ -81,15 +84,13 @@ internal class JServer
 
             var c = new ConnectedClient(client);
             _clients.Add(c);
-            if (_clients.Count == 2)
-                _clients[0].StartGameSession();
-        }
 
-        while (_full)
-        {
-            if (_clients.Count < 2)
-                _full = false;
-            
+            if (_clients.Count == PlayersAmount && isGameStarted == false)
+            {
+                _clients[0].StartGameSession();
+                _full = true;
+                isGameStarted = true;
+            }
         }
     }
 
