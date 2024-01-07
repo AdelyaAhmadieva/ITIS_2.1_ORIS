@@ -193,7 +193,7 @@ internal class ConnectedClient
            }).ToPacket());
         }
 
-        int PlayerBeginID = _random.Next(0, JServer._clients.Count() - 1);
+        int PlayerBeginID = _random.Next(0, JServer._clients.Count() - 1 -0);
         JServer._clients[PlayerBeginID].QueuePacketSend(JPacketConverter.Serialize(JPacketType.ChangeTurn, 
                 new JPacketChangeTurn()
                 {
